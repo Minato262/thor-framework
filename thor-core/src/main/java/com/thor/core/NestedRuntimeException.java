@@ -1,11 +1,11 @@
 package com.thor.core;
 
-import com.sun.istack.internal.Nullable;
+import com.thor.lang.Nullable;
 
 /**
  * 封装非检查性异常{@link RuntimeException}的抽象类。
  *
- * 这个类{@code abstract}是面向程序员的扩展类，
+ * <p>这个类{@code abstract}是面向程序员的扩展类。
  *
  * @author kay
  * @since v1.0

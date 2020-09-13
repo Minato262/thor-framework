@@ -1,11 +1,11 @@
 package com.thor.core;
 
-import com.sun.istack.internal.Nullable;
+import com.thor.lang.Nullable;
 
 /**
- * 框架内异常的辅助类.
+ * 框架内异常的辅助类。
  *
- * <p>仅仅能使用在框架内.
+ * <p>仅仅能使用在框架内。
  *
  * @author kay
  * @since v1.0
@@ -55,5 +55,4 @@ public class NestedExceptionUtils {
         }
         return rootCause;
     }
-
 }
