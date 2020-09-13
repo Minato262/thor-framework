@@ -13,7 +13,7 @@ import com.sun.istack.internal.Nullable;
 public abstract class NestedRuntimeException extends RuntimeException {
 
     static {
-        // RuntimeException getMessage() OSGi 问题. 具体报告：SPR-5607
+        // 解决 RuntimeException getMessage() OSGi 问题. 具体报告：SPR-5607
         NestedExceptionUtils.class.getName();
     }
 
