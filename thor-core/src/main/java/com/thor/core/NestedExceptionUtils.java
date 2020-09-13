@@ -9,6 +9,7 @@ import com.sun.istack.internal.Nullable;
  *
  * @author kay
  * @since v1.0
+ * @see NestedRuntimeException
  */
 public class NestedExceptionUtils {
 
