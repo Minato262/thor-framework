@@ -1,6 +1,6 @@
 package com.thor.core.util;
 
-import com.sun.istack.internal.Nullable;
+import com.thor.core.lang.Nullable;
 
 import java.util.Collection;
 

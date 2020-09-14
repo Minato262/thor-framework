@@ -11,5 +11,10 @@
 
     <artifactId>thor-remoting</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>com.thor</groupId>
+            <artifactId>thor-core</artifactId>
+        </dependency>
+    </dependencies>
 </project>
