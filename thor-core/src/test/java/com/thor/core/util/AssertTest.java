@@ -1,5 +1,6 @@
-package com.thor.util;
+package com.thor.core.util;
 
+import com.thor.core.util.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;

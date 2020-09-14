@@ -1,6 +1,7 @@
-package com.thor.core;
+package com.thor.core.util;
 
-import com.thor.lang.Nullable;
+import com.thor.core.NestedRuntimeException;
+import com.thor.core.lang.Nullable;
 
 /**
  * 框架内异常的辅助类。

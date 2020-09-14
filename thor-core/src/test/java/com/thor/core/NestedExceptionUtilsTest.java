@@ -1,6 +1,6 @@
 package com.thor.core;
 
-import com.thor.core.NestedExceptionUtils;
+import com.thor.core.util.NestedExceptionUtils;
 import org.junit.Assert;
 import org.junit.Test;
 

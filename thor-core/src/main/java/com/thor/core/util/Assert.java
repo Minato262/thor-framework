@@ -1,4 +1,4 @@
-package com.thor.util;
+package com.thor.core.util;
 
 import com.sun.istack.internal.Nullable;
 

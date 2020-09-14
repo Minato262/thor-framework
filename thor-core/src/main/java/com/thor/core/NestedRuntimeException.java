@@ -1,6 +1,7 @@
 package com.thor.core;
 
-import com.thor.lang.Nullable;
+import com.thor.core.lang.Nullable;
+import com.thor.core.util.NestedExceptionUtils;
 
 /**
  * 封装非检查性异常{@link RuntimeException}的抽象类。
@@ -47,7 +48,7 @@ public abstract class NestedRuntimeException extends RuntimeException {
     @Override
     @Nullable
     public String getMessage() {
-        return NestedExceptionUtils.buildMessage(super.getMessage(), getCause());
+        return NestedExceptionUtils.buildMessage(super.getMessage(), super.getCause());
     }
 
 
