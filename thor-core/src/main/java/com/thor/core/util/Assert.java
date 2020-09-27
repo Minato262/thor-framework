@@ -2,6 +2,7 @@ package com.thor.core.util;
 
 import com.thor.core.lang.Nullable;
 
+import java.security.InvalidParameterException;
 import java.util.Collection;
 
 /**
@@ -11,6 +12,44 @@ import java.util.Collection;
  * @since v1.0
  */
 public class Assert {
+
+    /**
+     * 判断对象不能为null，当对象为null时，会抛出异常
+     * <p>
+     *    eg:
+     *    <br>Assert.isNotNull(null)   = true  </br>
+     *    <br>Assert.isNotNull("")     = false </br>
+     *    <br>Assert.isNotNull("null") = false </br>
+     *    <br>Assert.isNotNull("aBCS") = false </br>
+     * </p>
+     *
+     * @param object 需要判断的对象
+     * @throws InvalidParameterException 如果对象为null，则抛出异常
+     */
+    public static void isNotNull(Object object) {
+        if (object == null) {
+            throw new InvalidParameterException("the object must be not null!");
+        }
+    }
+
+    /**
+     * 判断字符串不能为空，当字符串为空时，会抛出异常
+     * <p>
+     *    eg:
+     *    <br>Assert.isNotEmpty(null)   = true  </br>
+     *    <br>Assert.isNotEmpty("")     = true  </br>
+     *    <br>Assert.isNotEmpty("null") = false </br>
+     *    <br>Assert.isNotEmpty("aBCS") = false </br>
+     * </p>
+     *
+     * @param str 需要判断的字符串
+     * @throws InvalidParameterException 如果字符串为空，则抛出异常
+     */
+    public static void isNotEmpty(String str) {
+        if (str == null || "".equals(str)) {
+            throw new InvalidParameterException("the string must be not empty!");
+        }
+    }
 
     /**
      * 检测对象为 true 的断言.

@@ -10,11 +10,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>thor-remoting</artifactId>
+    <packaging>jar</packaging>
+    <name>${project.artifactId}</name>
+    <description>The remoting module of thor project</description>
 
     <dependencies>
         <dependency>
-            <groupId>com.thor</groupId>
-            <artifactId>thor-core</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

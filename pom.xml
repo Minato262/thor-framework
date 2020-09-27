@@ -15,11 +15,27 @@
         <module>thor-core</module>
         <module>thor-remoting</module>
         <module>thor-proxy</module>
+        <module>thor-demo</module>
+        <module>thor-registry</module>
+        <module>thor-transport</module>
+        <module>thor-container</module>
     </modules>
 
     <properties>
+        <!-- dependency libs -->
+        <netty_version>4.1.50.Final</netty_version>
+        <fastjson_version>1.2.62</fastjson_version>
+        <curator_version>4.0.1</curator_version>
+        <lombok_version>1.18.12</lombok_version>
+        <slf4j_version>1.7.25</slf4j_version>
+
         <!-- Test libs -->
         <junit_version>4.12</junit_version>
+
+        <!-- for maven compiler plugin -->
+        <java_source_version>1.8</java_source_version>
+        <java_target_version>1.8</java_target_version>
+        <file_encoding>UTF-8</file_encoding>
     </properties>
 
     <dependencyManagement>
@@ -39,17 +55,48 @@
                 <artifactId>thor-proxy</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.thor</groupId>
+                <artifactId>thor-registry</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.thor</groupId>
+                <artifactId>thor-transport</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.thor</groupId>
+                <artifactId>thor-container</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
+            <!-- dependency libs -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
-                <version>1.18.12</version>
+                <version>${lombok_version}</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-simple</artifactId>
-                <version>1.7.25</version>
+                <version>${slf4j_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <version>${curator_version}</version>
             </dependency>
 
             <!-- Test libs -->
@@ -61,4 +108,20 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <fork>true</fork>
+                    <source>${java_source_version}</source>
+                    <target>${java_target_version}</target>
+                    <encoding>${file_encoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

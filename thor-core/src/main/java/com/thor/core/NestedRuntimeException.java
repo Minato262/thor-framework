@@ -4,7 +4,7 @@ import com.thor.core.lang.Nullable;
 import com.thor.core.util.NestedExceptionUtils;
 
 /**
- * 封装非检查性异常{@link RuntimeException}的抽象类。
+ * 封装非检查性异常{@link RuntimeException}的框架抽象类。
  *
  * <p>这个类{@code abstract}是面向程序员的扩展类。
  *
@@ -26,6 +26,15 @@ public abstract class NestedRuntimeException extends RuntimeException {
      */
     public NestedRuntimeException(String message) {
         super(message);
+    }
+
+    /**
+     * 带有堆栈异常信息的构造器
+     *
+     * @param cause 堆栈信息
+     */
+    public NestedRuntimeException(Throwable cause) {
+        super(cause);
     }
 
     /**

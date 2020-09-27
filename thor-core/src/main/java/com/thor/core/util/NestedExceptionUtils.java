@@ -1,5 +1,6 @@
 package com.thor.core.util;
 
+import com.thor.core.NestedIOException;
 import com.thor.core.NestedRuntimeException;
 import com.thor.core.lang.Nullable;
 
@@ -11,6 +12,7 @@ import com.thor.core.lang.Nullable;
  * @author kay
  * @since v1.0
  * @see NestedRuntimeException
+ * @see NestedIOException
  */
 public class NestedExceptionUtils {
 

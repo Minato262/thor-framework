@@ -3,6 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.thor</groupId>
         <artifactId>thor-parent</artifactId>
@@ -12,13 +13,23 @@
     <artifactId>thor-core</artifactId>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
-    <description>The core module of dubbo project</description>
+    <description>The core module of thor project</description>
+
+    <properties>
+        <!-- dependency libs -->
+        <jsr305_version>2.0.1</jsr305_version>
+    </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.11.0</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -32,7 +43,7 @@
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
             <artifactId>jsr305</artifactId>
-            <version>2.0.1</version>
+            <version>${jsr305_version}</version>
         </dependency>
     </dependencies>
 </project>

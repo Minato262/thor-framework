@@ -10,11 +10,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>thor-proxy</artifactId>
+    <packaging>jar</packaging>
+    <name>${project.artifactId}</name>
+    <description>The proxy module of thor project</description>
 
     <dependencies>
-        <dependency>
-            <groupId>com.thor</groupId>
-            <artifactId>thor-remoting</artifactId>
-        </dependency>
+
     </dependencies>
 </project>
