@@ -1,8 +1,8 @@
 package com.thoy.transport.handler;
 
 import com.thor.container.annotation.ThorProvider;
-import com.thor.container.resoure.ClassResourceLoader;
-import com.thor.container.resoure.Resource;
+import com.thor.container.resource.ClassResourceLoader;
+import com.thor.container.resource.Resource;
 import com.thor.remoting.RequestData;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;

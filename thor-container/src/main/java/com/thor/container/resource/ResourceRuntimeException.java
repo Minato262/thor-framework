@@ -1,4 +1,4 @@
-package com.thor.container.resoure;
+package com.thor.container.resource;
 
 import com.thor.core.NestedRuntimeException;
 
