@@ -1,18 +1,14 @@
-package com.thoy.transport.netty;
+package com.thoy.transport.invoker;
 
 import com.thor.registry.ServiceRegistryUtils;
-import com.thoy.transport.handler.NettyFieldPrependerHandler;
-import com.thoy.transport.handler.NettyFrameDecoderHandler;
-import com.thoy.transport.handler.NettyIdleStateHandler;
-import com.thoy.transport.handler.NettyProviderTransportHandler;
+import com.thoy.transport.codec.MessageDecoder;
+import com.thoy.transport.codec.MessageEncoder;
+import com.thoy.transport.handler.*;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.serialization.ClassResolvers;
-import io.netty.handler.codec.serialization.ObjectDecoder;
-import io.netty.handler.codec.serialization.ObjectEncoder;
 import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,15 +17,9 @@ import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 
 @Slf4j
-public class NettyProvider {
+public class ConnectManageInvocation {
 
-    private final int port;
-
-    public NettyProvider(int port) {
-        this.port = port;
-    }
-
-    public void start() {
+    public void connect(int port) {
         // 创建2个对象
         EventLoopGroup boosGroup = new NioEventLoopGroup();
         EventLoopGroup workGroup = new NioEventLoopGroup();
@@ -49,18 +39,19 @@ public class NettyProvider {
                             pipeline.addLast(new NettyFieldPrependerHandler());
 
                             // 编码: 把内容转换为二进制，解码: 二进制转换为对应内容(使用JDK对应 使用序列化)
-                            pipeline.addLast("encoder", new ObjectEncoder());
-                            pipeline.addLast("decoder", new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.cacheDisabled(null)));
+                            pipeline.addLast(new MessageEncoder());
+                            pipeline.addLast(new MessageDecoder());
 
                             // 添加自定义处理器
                             pipeline.addLast(new NettyIdleStateHandler());
                             pipeline.addLast(new NettyProviderTransportHandler());
+                            pipeline.addLast(new NettyConnectManageHandler());
                         }
                     }).option(ChannelOption.SO_BACKLOG, 128)
                     .childOption(ChannelOption.SO_KEEPALIVE, true);
             // 绑定端口
             ChannelFuture channelFuture = bootstrap.bind(port).sync();
-            log.info("Netty RPC Starting Listen " + this.port);
+            log.info("Netty RPC Starting Listen: {}", port);
 
             // 启动成功之后注册到注册中心
             serviceRegistry(port);

@@ -24,10 +24,6 @@
             <groupId>com.thor</groupId>
             <artifactId>thor-remoting</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.thor</groupId>
-            <artifactId>thor-container</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>io.netty</groupId>
@@ -50,10 +46,6 @@
         <dependency>
             <groupId>com.thor</groupId>
             <artifactId>thor-proxy</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.thor</groupId>
-            <artifactId>thor-container</artifactId>
         </dependency>
     </dependencies>
 </project>

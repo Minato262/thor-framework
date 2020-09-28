@@ -1,11 +1,11 @@
 package com.kay.cn.server;
 
-import com.thoy.transport.netty.NettyProvider;
+import com.thoy.transport.request.ThorProvider;
 
 public class ServiceApp {
 
     public static void main(String[] args) {
-        NettyProvider rpcServer = new NettyProvider(11111);
-        rpcServer.start();
+        ThorProvider provider = new ThorProvider(11111);
+        provider.start();
     }
 }
