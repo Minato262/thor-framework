@@ -1,5 +1,6 @@
 package com.thoy.transport.invoker;
 
+import com.thor.registry.zk.ZookeeperRegistryCenter;
 import com.thor.remoting.Request;
 import com.thoy.transport.codec.MessageDecoder;
 import com.thoy.transport.codec.MessageEncoder;
@@ -27,11 +28,9 @@ import java.util.UUID;
 public class MethodProxyInvocation implements InvocationHandler {
 
     private final Class<?> clazz;
-    private final InetSocketAddress address;
 
-    public MethodProxyInvocation(Class<?> clazz, InetSocketAddress address) {
+    public MethodProxyInvocation(Class<?> clazz) {
         this.clazz = clazz;
-        this.address = address;
     }
 
     @Override
@@ -66,6 +65,10 @@ public class MethodProxyInvocation implements InvocationHandler {
                             pipeline.addLast(transactionHandler);
                         }
                      });
+            // 通过负载均衡获取对应处理服务实例信息
+            ZookeeperRegistryCenter center = new ZookeeperRegistryCenter();
+            InetSocketAddress address = center.chooseService();
+
             // 连接服务端
             ChannelFuture channelFuture = bootstrap.connect(address).sync();
 

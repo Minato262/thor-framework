@@ -1,7 +1,7 @@
 package com.key.cn;
 
-import com.kay.cn.server.OrderService;
-import com.kay.cn.server.OrderServiceImpl;
+import com.kay.cn.server.jar.OrderService;
+import com.kay.cn.server.jar.OrderServiceImpl;
 import org.junit.Test;
 
 public class ClazzTest {

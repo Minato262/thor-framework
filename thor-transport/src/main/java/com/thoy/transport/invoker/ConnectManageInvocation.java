@@ -59,7 +59,7 @@ public class ConnectManageInvocation implements ConnectManage {
             log.info("Netty RPC Starting Listen: {}", port);
 
             // 启动成功之后注册到注册中心
-            new ZookeeperRegistryCenter(port);
+            new ZookeeperRegistryCenter().connect(port);
 
             // 释放连接
             channelFuture.channel().closeFuture().sync();

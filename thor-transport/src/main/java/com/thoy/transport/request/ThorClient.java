@@ -14,13 +14,9 @@ import java.lang.reflect.Proxy;
 @Slf4j
 public class ThorClient extends AbstractProxyFactory {
 
-    public ThorClient(String hostname, int port) {
-        super(hostname, port);
-    }
-
     @Override
     public <T> Object create(Class<T> interfaceClass) {
-        InvocationHandler methodProxy = new MethodProxyInvocation(interfaceClass, this.getAddress());
+        InvocationHandler methodProxy = new MethodProxyInvocation(interfaceClass);
         Class<?>[] interfaces = getClazz(interfaceClass);
         return Proxy.newProxyInstance(interfaceClass.getClassLoader(), interfaces, methodProxy);
     }
