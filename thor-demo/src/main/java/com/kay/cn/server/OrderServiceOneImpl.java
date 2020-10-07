@@ -6,14 +6,14 @@ import com.thor.container.annotation.ThorProvider;
 import java.math.BigDecimal;
 
 @ThorProvider
-public class OrderServiceImpl implements OrderService {
+public class OrderServiceOneImpl implements OrderServiceOne {
 
     @Override
     public Order findOrderInfoById(Long id) {
         Order order = new Order();
         order.setId(id);
-        order.setName("测试订单");
-        order.setPrice(new BigDecimal("3.4"));
+        order.setName("测试订单1:");
+        order.setPrice(new BigDecimal("2323.4"));
         return order;
     }
 }

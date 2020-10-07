@@ -8,7 +8,7 @@ import java.util.List;
  * 文件资源
  *
  * @author kay
- * @version v2.0
+ * @version v1.0
  */
 public class FileResource {
 

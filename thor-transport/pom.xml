@@ -24,6 +24,10 @@
             <groupId>com.thor</groupId>
             <artifactId>thor-remoting</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.thor</groupId>
+            <artifactId>thor-container</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>io.netty</groupId>

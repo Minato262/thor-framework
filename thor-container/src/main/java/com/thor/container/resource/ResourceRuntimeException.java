@@ -1,6 +1,6 @@
 package com.thor.container.resource;
 
-import com.thor.core.NestedRuntimeException;
+import com.thor.container.ContainerRuntimeException;
 
 /**
  * 资源相关基础异常
@@ -9,7 +9,7 @@ import com.thor.core.NestedRuntimeException;
  * @author kay
  * @version v1.0
  */
-abstract class ResourceRuntimeException extends NestedRuntimeException {
+abstract class ResourceRuntimeException extends ContainerRuntimeException {
     private static final long serialVersionUID = -203034699454123415L;
 
     /**

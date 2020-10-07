@@ -4,6 +4,10 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ *
+ * @author kay
+ */
 @Slf4j
 public class NettyClientTransactionHandler extends ChannelInboundHandlerAdapter {
 
@@ -20,6 +24,6 @@ public class NettyClientTransactionHandler extends ChannelInboundHandlerAdapter 
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        log.info("RPC invoker fail");
+        log.error("RPC invoker fail", cause);
     }
 }

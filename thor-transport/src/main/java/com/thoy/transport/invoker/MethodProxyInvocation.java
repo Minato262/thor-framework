@@ -1,6 +1,6 @@
 package com.thoy.transport.invoker;
 
-import com.thor.remoting.RequestData;
+import com.thor.remoting.Request;
 import com.thoy.transport.codec.MessageDecoder;
 import com.thoy.transport.codec.MessageEncoder;
 import com.thoy.transport.handler.NettyClientTransactionHandler;
@@ -10,13 +10,19 @@ import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.net.InetSocketAddress;
+import java.util.UUID;
 
+/**
+ *
+ * @author kay
+ */
 @Slf4j
 public class MethodProxyInvocation implements InvocationHandler {
 
@@ -29,23 +35,24 @@ public class MethodProxyInvocation implements InvocationHandler {
     }
 
     @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    public Object invoke(Object proxy, Method method, Object[] args) {
         // 远程连接服务端调用服务端对应方法获取调用结果返回给客户端
         // 1、创建Netty客户的worker线程组
         EventLoopGroup group = new NioEventLoopGroup();
 
-        NettyClientTransactionHandler rpcClientHandler = new NettyClientTransactionHandler();
+        NettyClientTransactionHandler transactionHandler = new NettyClientTransactionHandler();
         try {
             // 2、创建客户端引导类关联线程组
             Bootstrap bootstrap = new Bootstrap();
-            bootstrap.group(group).channel(NioSocketChannel.class)
-                    .option(ChannelOption.TCP_NODELAY, true)
-                    .handler(new ChannelInitializer<NioSocketChannel>() {
+            bootstrap.group(group)
+                     .channel(NioSocketChannel.class)
+                     .option(ChannelOption.TCP_NODELAY, true)
+                     .handler(new ChannelInitializer<NioSocketChannel>() {
                         @Override
                         protected void initChannel(NioSocketChannel ch) {
                             // 获取管道对象
                             ChannelPipeline pipeline = ch.pipeline();
-                            pipeline.addLast(new LoggingHandler());
+                            pipeline.addLast(new LoggingHandler(LogLevel.INFO));
 
                             // 解决粘包拆包问题
                             pipeline.addLast(new NettyFrameDecoderHandler());
@@ -56,28 +63,30 @@ public class MethodProxyInvocation implements InvocationHandler {
                             pipeline.addLast(new MessageDecoder());
 
                             // 添加自定义处理器
-                            pipeline.addLast(rpcClientHandler);
+                            pipeline.addLast(transactionHandler);
                         }
-                    });
+                     });
             // 连接服务端
             ChannelFuture channelFuture = bootstrap.connect(address).sync();
+
             // 创建客户端传递给服务的数据
-            RequestData requestData = new RequestData();
-            requestData.setInterfaceName(clazz.getName());
-            requestData.setMethodName(method.getName());
-            requestData.setParameterTypes(method.getParameterTypes());
-            requestData.setArgs(args);
+            Request request = new Request();
+            request.setRequestId(UUID.randomUUID().toString());
+            request.setInterfaceName(clazz.getName());
+            request.setMethodName(method.getName());
+            request.setParameters(method.getParameterTypes());
+            request.setArgs(args);
+
             // 发送给服务端
-            channelFuture.channel().writeAndFlush(requestData).sync();
-            // 关闭资源
+            channelFuture.channel().writeAndFlush(request).sync();
             channelFuture.channel().closeFuture().sync();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("netty error!", e);
         } finally {
             group.shutdownGracefully();
         }
 
         // 返回调用结果
-        return rpcClientHandler.getResult();
+        return transactionHandler.getResult();
     }
 }

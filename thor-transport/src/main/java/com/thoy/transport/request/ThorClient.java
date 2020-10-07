@@ -1,14 +1,18 @@
 package com.thoy.transport.request;
 
 import com.thor.proxy.AbstractProxyFactory;
-import com.thor.proxy.ProxyFactory;
 import com.thoy.transport.invoker.MethodProxyInvocation;
 import lombok.extern.slf4j.Slf4j;
 
+import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 
+/**
+ *
+ * @author kay
+ */
 @Slf4j
-public class ThorClient extends AbstractProxyFactory implements ProxyFactory {
+public class ThorClient extends AbstractProxyFactory {
 
     public ThorClient(String hostname, int port) {
         super(hostname, port);
@@ -16,7 +20,7 @@ public class ThorClient extends AbstractProxyFactory implements ProxyFactory {
 
     @Override
     public <T> Object create(Class<T> interfaceClass) {
-        MethodProxyInvocation methodProxy = new MethodProxyInvocation(interfaceClass, this.getAddress());
+        InvocationHandler methodProxy = new MethodProxyInvocation(interfaceClass, this.getAddress());
         Class<?>[] interfaces = getClazz(interfaceClass);
         return Proxy.newProxyInstance(interfaceClass.getClassLoader(), interfaces, methodProxy);
     }

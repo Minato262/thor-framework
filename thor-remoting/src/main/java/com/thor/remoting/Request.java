@@ -5,10 +5,11 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class RequestData implements Serializable {
+public class Request implements Serializable {
 
+    private String requestId;
     private String interfaceName;
     private String methodName;
-    private Class<?>[] parameterTypes;
+    private Class<?>[] parameters;
     private Object[] args;
 }
